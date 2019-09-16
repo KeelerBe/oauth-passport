@@ -3,6 +3,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 const bodyParser = require('body-parser')
+const authRoutes = require('./routes/authRoutes')
 require('./models/userSchema')
 require('./services/passport')
 require('colors')
@@ -25,6 +26,7 @@ app.use(passport.session())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+authRoutes(app)
 app.get('/', (req, res) => res.send({ success: true }))
 
 const PORT = process.env.PORT || 8000
